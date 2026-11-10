@@ -458,11 +458,12 @@
     document.getElementById('cardQuestion').textContent = card.question || card.prompt;
     document.getElementById('cardHint').textContent = card.hint || card.requirement || 'Honesty above all.';
 
-    // Flip animation trigger
+    // 3D Card Reveal animation trigger (forward-facing, non-mirrored)
     const inner = document.getElementById('cardFlipInner');
     if (inner) {
-      inner.classList.remove('is-flipped');
-      setTimeout(() => inner.classList.add('is-flipped'), 50);
+      inner.classList.remove('card-flip-enter');
+      void inner.offsetWidth; // Force CSS reflow
+      inner.classList.add('card-flip-enter');
     }
 
     renderAnswersAndControls(card);

@@ -100,22 +100,31 @@ body {
   perspective: 1200px;
 }
 
+@keyframes cardDrawFlip {
+  0% {
+    opacity: 0;
+    transform: perspective(1200px) rotateY(-90deg) scale(0.88);
+  }
+  60% {
+    opacity: 1;
+    transform: perspective(1200px) rotateY(10deg) scale(1.02);
+  }
+  80% {
+    transform: perspective(1200px) rotateY(-4deg) scale(0.99);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(1200px) rotateY(0deg) scale(1);
+  }
+}
+
 .card-flip-inner {
-  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  transform-style: preserve-3d;
+  transform: perspective(1200px) rotateY(0deg);
+  will-change: transform, opacity;
 }
 
-.card-flip-inner.is-flipped {
-  transform: rotateY(180deg);
-}
-
-.card-front, .card-back {
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-.card-back {
-  transform: rotateY(180deg);
+.card-flip-enter {
+  animation: cardDrawFlip 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Mystical Card Back Texture */
